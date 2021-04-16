@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       date: null,
-      time: "00:00:01",
+      time: "23:59:59",
       name: null,
       errors: [],
     };
