@@ -1,5 +1,7 @@
 <template>
-  <router-view/>
+  <div class="mx-20">
+    <router-view/>
+  </div>
 </template>
 
 <style>
