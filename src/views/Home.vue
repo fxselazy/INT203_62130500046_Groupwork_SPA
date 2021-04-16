@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center space-y-24">
       <h1 class="text-6xl font-bold">Timer Website</h1>
       <div class="flex space-x-8 text-2xl">
-        <router-link to="">
+        <router-link to="/timerlist">
           <button class="bg-gray-300 py-2 px-6">
             your timer
           </button>

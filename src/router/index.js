@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import NewTimerPage from '@/views/NewTimerPage.vue';
+import TimerList from '@/views/TimerList.vue';
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     path: '/newTimer',
     name: 'NewTimer',
     component: NewTimerPage
+  },
+  {
+    path: '/timerlist',
+    name: "TimerList",
+    component: TimerList
   }
 ]
 
