@@ -1,6 +1,6 @@
 <template>
   <div class="mt-24">
-      <add-timer-form></add-timer-form>
+      <timer-form></timer-form>
   </div>
 </template>
 
