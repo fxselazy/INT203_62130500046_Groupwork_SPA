@@ -60,7 +60,7 @@ export default {
         } else {
           axios.post("http://localhost:3000/timer", {
             name: this.name,
-            data: this.date,
+            date: this.date,
             time: this.time,
           }).then(()=>{
               this.$router.push("/");
