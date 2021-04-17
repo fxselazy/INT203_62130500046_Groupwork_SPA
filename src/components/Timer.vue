@@ -6,12 +6,13 @@
     </div>
     <div class="space-x-4">
       <button class="w-8 h-8 bg-gray-400"></button>
-      <button class="w-8 h-8 bg-red-400"></button>
+      <button class="w-8 h-8 bg-red-400" @click="remove"></button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
@@ -32,21 +33,46 @@ export default {
         minute: 0,
         second: 0,
       },
-      interval: null
+      interval: null,
     };
   },
   computed: {
     dateTime() {
       return new Date(this.date + " " + this.time);
     },
-    stringTimeLeft(){
-      return `${this.timeLeft.day} day(s) ${this.timeLeft.hour}:${this.timeLeft.minute}:${this.timeLeft.second}`
-    }
+    stringTimeLeft() {
+      let string = `${this.timeLeft.day} day(s) `;
+      if (this.timeLeft.hour < 10) {
+        string += "0";
+      }
+      if (this.timeLeft.hour == 0) {
+        string += "0";
+      }
+      string += `${this.timeLeft.hour}:`;
+      if (this.timeLeft.minute < 10) {
+        string += "0";
+      }
+      if (this.timeLeft.minute == 0) {
+        string += "0";
+      }
+      string += `${this.timeLeft.minute}:`;
+      if (this.timeLeft.second < 10) {
+        string += 0;
+      }
+      if (this.timeLeft.second == 0) {
+        string += "0";
+      }
+      string += `${this.timeLeft.second}`;
+      return string;
+    },
   },
   methods: {
-    dateTimeLeftCal(){
-      
-    }
+    remove() {
+      clearInterval(this.interval);
+      axios.delete("http://localhost:3000/timer/" + this.id).then(()=>{
+        location.reload();
+      });
+    },
   },
   mounted() {
     this.interval = setInterval(() => {
@@ -59,11 +85,16 @@ export default {
       this.timeLeft.hour = hourLeft;
       this.timeLeft.minute = minuteLeft;
       this.timeLeft.second = secondLeft;
+
+      if (timeLeft <= 0) {
+        this.remove();
+        
+      }
     }, 1000);
   },
-  beforeUnmount(){
+  beforeUnmount() {
     clearInterval(this.interval);
-  }
+  },
 };
 </script>
 
