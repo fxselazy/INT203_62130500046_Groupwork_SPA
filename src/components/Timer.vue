@@ -4,8 +4,8 @@
       <p class="text-left">{{ name }}</p>
       <p class="col-span-2">{{ stringTimeLeft }}</p>
     </div>
-    <div class="space-x-4">
-      <button class="w-8 h-8 bg-gray-400"></button>
+    <div class="space-x-4" v-show="!preview">
+      <button class="w-8 h-8 bg-gray-400" @click="change"></button>
       <button class="w-8 h-8 bg-red-400" @click="remove"></button>
     </div>
   </div>
@@ -24,6 +24,10 @@ export default {
     date: String,
     time: String,
     id: String,
+    preview: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -45,22 +49,13 @@ export default {
       if (this.timeLeft.hour < 10) {
         string += "0";
       }
-      if (this.timeLeft.hour == 0) {
-        string += "0";
-      }
       string += `${this.timeLeft.hour}:`;
       if (this.timeLeft.minute < 10) {
-        string += "0";
-      }
-      if (this.timeLeft.minute == 0) {
         string += "0";
       }
       string += `${this.timeLeft.minute}:`;
       if (this.timeLeft.second < 10) {
         string += 0;
-      }
-      if (this.timeLeft.second == 0) {
-        string += "0";
       }
       string += `${this.timeLeft.second}`;
       return string;
@@ -73,6 +68,9 @@ export default {
         location.reload();
       });
     },
+    change(){
+      this.$router.push("/edit/" + this.id);
+    }
   },
   mounted() {
     this.interval = setInterval(() => {
